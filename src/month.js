@@ -8,60 +8,48 @@ export class Month extends React.Component {
   }
 
   render() {
-    const name = "February: 2022";
-
+    const dayList = [];
+    const space = " ";
+    var monthDict = {
+      1: "January",
+      2: "February",
+      3: "March",
+      4: "April",
+      5: "May",
+      6: "June",
+      7: "July",
+      8: "August",
+      9: "September",
+      10: "Ocotber",
+      11: "November",
+      12: "December",
+    };
+    let newDate = new Date();
+    //let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+    //as of now hardcoding the number of days
+    for (let i = 1; i <= 31; i++) {
+      dayList.push(<Square day={i} />);
+    }
+    const monthName = Object.entries(monthDict).map(([key, value]) => {
+      return (
+        <div key={key}>
+          {month === key ? (
+            <h2>
+              {year} {space}
+              {value}
+            </h2>
+          ) : null}
+        </div>
+      );
+    });
     return (
       <div>
         <div>
-          <h1>Hello, world!</h1>
-          <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+          <h2>{monthName}</h2>
         </div>
-        <div className="name">{name}</div>
-        <div className="week-row">
-          <Square day={this.state.count} />
-          <Square day={this.state.count + 1} />
-          <Square day={this.state.count + 2} />
-          <Square day={this.state.count + 3} />
-          <Square day={this.state.count + 4} />
-          <Square day={this.state.count + 5} />
-          <Square day={this.state.count + 6} />
-        </div>
-        <div className="week-row">
-          <Square day={this.state.count + 7} />
-          <Square day={this.state.count + 8} />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-        </div>
-        <div className="week-row">
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-        </div>
-        <div className="week-row">
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-        </div>
-        <div className="week-row">
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-          <Square />
-        </div>
+        <div>{dayList}</div>
       </div>
     );
   }

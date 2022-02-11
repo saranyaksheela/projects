@@ -1,5 +1,5 @@
 import React from "react";
-import { Example } from "./note-pad";
+import { NotePad } from "./note-pad";
 
 export class Square extends React.Component {
   constructor(props) {
@@ -7,17 +7,21 @@ export class Square extends React.Component {
     this.state = { count: this.props.day, isnote: false };
   }
 
-  showNotes() {
-    return <Example />;
-  }
+  handleShow = () => {
+    this.setState({
+      isnote: true,
+    });
+  };
 
   render() {
     return (
       <div>
         <div>
-          <button className="square">{this.state.count}</button>
+          <button className="square">
+            <button onClick={this.handleShow}>{this.state.count}</button>
+          </button>
         </div>
-        <div>{true && <Example />}</div>
+        <div>{this.state.isnote && <NotePad />}</div>
       </div>
     );
   }
